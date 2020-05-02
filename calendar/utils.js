@@ -3,7 +3,21 @@
  * @param {Object} event - google calendar event
  */
 function extractRequiredInfo(event) {
+    /**
+     * summary
+     * duration in hours
+     * event date
+     */
+    const duration = calculateDurationHours(event)
+    const {summary, start: {dateTime}} = event
 
+    const shortISOString = dateTime.split('T')[0]
+
+    return {
+        date: shortISOString,
+        duration,
+        summary
+    }
 }
 
 /**
@@ -19,17 +33,15 @@ function calculateDurationHours(event) {
 }
 /**
  * Filters list of event by params
- * @param {Object[]} filters - params for filtering
- * @param {string} filters[].field - field to filter by
- * @param {string} filters[].values[] - if a field has a one of the following value in this case event will be filtered
+ * @param {Object} event - calendar event
+ * @param {string[]} excludedSummaries - array of event summaries for filtration
  */
-function eventsFilter(filters) {
-
+function filterBySummary(event, excludedSummaries) {
+    return !excludedSummaries.includes(event.summary)
 }
 
 module.exports = {
     extractRequiredInfo,
-    calculateDurationHours,
-    eventsFilter
+    filterBySummary
 }
 

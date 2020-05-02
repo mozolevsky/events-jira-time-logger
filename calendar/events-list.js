@@ -1,5 +1,5 @@
 const {google} = require('googleapis');
-const {calculateDurationHours} = require('./utils') 
+const {extractRequiredInfo, filterBySummary} = require('./utils') 
 
 const calendarSettings = {
   calendarId: 'primary',
@@ -27,11 +27,11 @@ function listEvents(auth) {
   }
 
 function extractEventsInfo(events) {
-  events.map((event, i) => {
-    const duration = calculateDurationHours(event)
+  const finalEvents = events
+    .filter(event => filterBySummary(event, ['UI Infra Scrum']))
+    .map(extractRequiredInfo)
 
-    console.log(`${event.start.dateTime} - ${event.summary} - ${duration}`);
-  });
+    console.log(finalEvents)
 }
 
 module.exports = listEvents
