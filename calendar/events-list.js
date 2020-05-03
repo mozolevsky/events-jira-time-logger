@@ -28,7 +28,7 @@ function listEvents(auth) {
 
 function extractEventsInfo(events) {
   const finalEvents = events
-    .filter(event => filterBySummary(event, ['UI Infra Scrum']))
+    .filter(event => filterBySummary(event, []))
     .map(extractRequiredInfo)
 
     console.log(finalEvents)
