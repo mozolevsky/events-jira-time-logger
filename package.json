@@ -4,7 +4,12 @@
   "license": "MIT",
   "author": "Sergey <mrmozolevsky@gmail.com>",
   "description": "Helper for moving events time from a google-calendar to a jira",
-  "keywords": ["jira", "time", "time log", "google-calendar"],
+  "keywords": [
+    "jira",
+    "time",
+    "time log",
+    "google-calendar"
+  ],
   "homepage": "https://github.com/mozolevsky/events-jira-time-logger/blob/master/README.md",
   "bugs": {
     "url": "https://github.com/mozolevsky/events-jira-time-logger/issues",
@@ -14,6 +19,7 @@
   "repository": "git@github.com:mozolevsky/events-jira-time-logger.git",
   "dependencies": {
     "googleapis": "39",
+    "jira-connector": "^3.1.0",
     "linebyline": "^1.3.0"
   },
   "bin": {

@@ -3,13 +3,13 @@ const {extractRequiredInfo, filterBySummary} = require('./utils')
 
 const calendarSettings = {
   calendarId: 'primary',
-  timeMin: (new Date('2020-04-27')).toISOString(),
-  timeMax: (new Date('2020-05-01')).toISOString(),
+  timeMin: (new Date('2020-05-04')).toISOString(),
+  timeMax: (new Date('2020-05-05')).toISOString(),
   singleEvents: true,
   orderBy: 'startTime',
 }
 
-function listEvents(auth) {
+function listEvents(auth, cb) {
     const calendar = google.calendar({version: 'v3', auth});
 
     calendar.events.list(calendarSettings, (err, res) => {
@@ -19,7 +19,8 @@ function listEvents(auth) {
       
       const events = res.data.items;
       if (events.length) {
-        extractEventsInfo(events)
+        const eventsInfo = extractEventsInfo(events)
+        cb(eventsInfo)
       } else {
         console.log('No upcoming events found.');
       }
@@ -27,11 +28,9 @@ function listEvents(auth) {
   }
 
 function extractEventsInfo(events) {
-  const finalEvents = events
+  return events
     .filter(event => filterBySummary(event, []))
     .map(extractRequiredInfo)
-
-    console.log(finalEvents)
 }
 
 module.exports = listEvents
