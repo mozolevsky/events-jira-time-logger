@@ -1,4 +1,6 @@
-const {google} = require('googleapis');
+const {google} = require('googleapis')
+const fs = require('fs')
+const authorize = require('./calendar-autorize')
 const {extractRequiredInfo, filterBySummary} = require('./utils') 
 
 const calendarSettings = {
@@ -33,4 +35,14 @@ function extractEventsInfo(events) {
     .map(extractRequiredInfo)
 }
 
-module.exports = listEvents
+const getEventsInfo = () => new Promise((resolve, reject) => {
+  fs.readFile('./security/calendar-credentials.json', (err, content) => {
+    if (err) {
+      reject('Please add the credentials.json file')
+    }
+    
+    authorize(JSON.parse(content), auth => listEvents(auth, resolve))
+  })
+})
+
+module.exports = getEventsInfo
