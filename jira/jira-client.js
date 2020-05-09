@@ -1,14 +1,15 @@
 const JiraClient = require('jira-connector')
+const {getJiraCredentials} = require('./utils')
 
-// Basic Authentication (Deprecated)
+const {host, username, password} = getJiraCredentials()
+
 const jira = new JiraClient({
-    host: "jira.exigeninsurance.com",
+    host,
     basic_auth: {
-        //TODO: read credentials from a secure file
-        username: "login",
-        password: "password"
+        username,
+        password
     }
-});
+})
 
 const updateWorkLog = (issueKey, {timeSpentSeconds, comment, started}) => {
     return jira.issue.addWorkLog({
