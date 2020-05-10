@@ -2,13 +2,13 @@
  * Extracts a base info from an event
  * @param {Object} event - google calendar event
  */
-function extractRequiredInfo(event) {
+const extractRequiredInfo = event => {
     /**
      * summary
      * duration in hours
      * event date
      */
-    const duration = calculateDurationHours(event)
+    const duration = calculateDuration(event)
     const {summary, start: {dateTime}} = event
 
     const shortISOString = dateTime.split('T')[0]
@@ -25,23 +25,32 @@ function extractRequiredInfo(event) {
  * @param {Date} startDate - event start date
  * @param {Date} endDate - event end date
  */
-function calculateDurationHours(event) {
+const calculateDuration = event => {
     const endTime = event.end && event.end.dateTime
     const startTime = event.start && event.start.dateTime
 
-    return endTime && startTime ? (new Date(endTime) - new Date(startTime)) / (1000 * 60 * 60) : 0
+    return endTime && startTime ? (new Date(endTime) - new Date(startTime)) / 1000 : 0
 }
 /**
  * Filters list of event by params
  * @param {Object} event - calendar event
  * @param {string[]} excludedSummaries - array of event summaries for filtration
  */
-function filterBySummary(event, excludedSummaries) {
-    return !excludedSummaries.includes(event.summary)
+const filterBySummary = (event, excludedSummaries) => !excludedSummaries.includes(event.summary)
+
+const getISODateWithOffset = (dateStr, offset) => {
+    let date = new Date(dateStr)
+
+    if (offset && typeof offset === 'number') {
+        date.setDate(date.getDate() + offset)
+    }
+
+    return date.toISOString()
 }
 
 module.exports = {
     extractRequiredInfo,
-    filterBySummary
+    filterBySummary,
+    getISODateWithOffset
 }
 

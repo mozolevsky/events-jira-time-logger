@@ -2,17 +2,30 @@ const getEventsInfo = require('./calendar/events-list')
 const {getWorklog, updateWorkLog} = require('./jira/jira-client')
 
 
-getEventsInfo().then(console.log).catch(console.log)
+getEventsInfo({
+  start: '2020-05-11',
+  end: '2020-05-11'
+}).then(events => {
+  if (!events.length) {
+    console.log('no events for logging')
+  }
+
+  console.log(events)
+  updatePeriodWorkLog(events)
+
+}).catch(console.log)
 
 
-updateWorkLog('jira task number', {
-  comment: "I did some work here.",
-  started: "2020-05-05T06:53:06.605+0000",
-  timeSpentSeconds: 3600
-})
-.then(res => console.log(res))
-.catch(err => console.log(err))
+const updatePeriodWorkLog = async events => {
+  for (const event of events) {
+    await updateWorkLog('ITL-3', {
+      comment: event.summary,
+      started: `${event.date}T06:53:06.605+0000`,
+      timeSpentSeconds: event.duration
+    })
+  }
+} 
 
-getWorklog('GENESIS-38248')
-  .then(res => console.log(res))
-  .catch(err => console.log(JSON.parse(err)))
+// getWorklog('GENESIS-38248')
+//   .then(res => console.log(res))
+//   .catch(err => console.log(JSON.parse(err)))
