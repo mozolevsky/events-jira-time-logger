@@ -1,31 +1,11 @@
 const getEventsInfo = require('./calendar/events-list')
-const {getWorklog, updateWorkLog} = require('./jira/jira-client')
+const {getWorklog, updatePeriodWorkLog} = require('./jira/jira-client')
 
+/**
+ * Logs time from all events of certain period to a jira meetings task
+ * @param {string} start date of the period in format '2020-05-11'
+ * @param {string} end date of the period in format '2020-05-11'
+ */
+const logEventsTime = (start, end) => getEventsInfo({start, end}).then(updatePeriodWorkLog)
 
-getEventsInfo({
-  start: '2020-05-11',
-  end: '2020-05-11'
-}).then(events => {
-  if (!events.length) {
-    console.log('no events for logging')
-  }
-
-  console.log(events)
-  updatePeriodWorkLog(events)
-
-}).catch(console.log)
-
-
-const updatePeriodWorkLog = async events => {
-  for (const event of events) {
-    await updateWorkLog('ITL-3', {
-      comment: event.summary,
-      started: `${event.date}T06:53:06.605+0000`,
-      timeSpentSeconds: event.duration
-    })
-  }
-} 
-
-// getWorklog('GENESIS-38248')
-//   .then(res => console.log(res))
-//   .catch(err => console.log(JSON.parse(err)))
+module.exports = {logEventsTime}
