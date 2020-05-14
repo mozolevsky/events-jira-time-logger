@@ -31,11 +31,9 @@ const questions = [
     }
 ]
 
-inquirer.prompt(questions).then(answers => {
-    const {startDate, endDate} = answers
-
+inquirer.prompt(questions).then(({startDate, endDate}) => {
     if (startDate && endDate) {
-        console.log('Start logging ...')
+        console.log('Logging ...')
         logEventsTime(startDate, endDate).then(res => console.log('Time was logged successfully')).catch(console.log)
     }
 
