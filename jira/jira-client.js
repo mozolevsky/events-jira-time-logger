@@ -31,7 +31,9 @@ const updatePeriodWorkLog = async events => {
         comment: event.summary,
         started: `${event.date}T00:00:00.000-0700`,
         timeSpentSeconds: event.duration
-      })
+      }).then(res => {
+          console.log(`${event.date} - ${event.summary} - [DONE]`)
+      }).catch(console.log)
     }
   }
 

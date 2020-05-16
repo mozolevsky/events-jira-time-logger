@@ -1,5 +1,7 @@
 const inquirer = require('inquirer')
+const colors = require('colors')
 const {logEventsTime} = require('./')
+const validateDate = require('./utils')
 
 const questions = [
     {
@@ -21,20 +23,22 @@ const questions = [
         'type': 'input',
         'name': 'startDate',
         'message': "Enter start date e.g. '2020-05-11'",
+        'validate': validateDate,
         'when': (answers) => answers.command === 'logTime'
     },
     {
         'type': 'input',
         'name': 'endDate',
         'message': "Enter end date e.g. '2020-05-12'",
+        'validate': validateDate,
         'when': (answers) => answers.startDate !== undefined
     }
 ]
 
 inquirer.prompt(questions).then(({startDate, endDate}) => {
     if (startDate && endDate) {
-        console.log('Logging ...')
-        logEventsTime(startDate, endDate).then(res => console.log('Time was logged successfully')).catch(console.log)
+        console.log('Logging ...'.yellow)
+        logEventsTime(startDate, endDate).then(res => console.log('Time was logged successfully'.green)).catch(console.log)
     }
 
 }).catch(console.log)
