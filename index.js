@@ -1,5 +1,5 @@
 const getEventsInfo = require('./calendar/events-list')
-const {getWorklog, updatePeriodWorkLog} = require('./jira/jira-client')
+const {getWorklog, updatePeriodWorkLog} = require('./jira/jira-methods')
 
 /**
  * Logs time from all events of certain period to a jira meetings task

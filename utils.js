@@ -28,7 +28,39 @@ const getGeneralSettings = () => {
   throw new Error('Can\'t find ./settings/general.json')
 }
 
+const createEmptySettingFiles = () => {
+  [
+    {
+      path: './security/calendar-credentials.json',
+      content: 'Put here credential from https://developers.google.com/calendar/quickstart/nodejs'
+    },
+    {
+      path: './security/jira-credentials.json',
+      content: {
+        host: '',
+        username: '',
+        password: ''
+      }
+    },
+    {
+      path: './settings/general.json',
+      content: {
+        taskKey: '',
+        excludedSummaries: []
+      }
+    }
+  ].forEach(({path, content}) => {
+    if (fs.existsSync(path)) {
+      console.log(`File ${path} already exists`)
+    } else {
+      fs.writeFileSync(path, JSON.stringify(content), {encoding: 'utf-8'})
+      console.log(`File: ${path} created`)
+    }
+  })
+}
+
 module.exports = {
   validateDate,
-  getGeneralSettings
+  getGeneralSettings,
+  createEmptySettingFiles
 }
