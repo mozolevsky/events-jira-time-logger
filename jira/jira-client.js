@@ -26,15 +26,23 @@ const getWorklog = (issueKey) => {
 }
 
 const updatePeriodWorkLog = async events => {
-    for (const event of events) {
-      await updateWorkLog('ITL-3', {
-        comment: event.summary,
-        started: `${event.date}T00:00:00.000-0700`,
-        timeSpentSeconds: event.duration
-      }).then(res => {
-          console.log(`${event.date} - ${event.summary} - [DONE]`)
-      }).catch(console.log)
+
+    if (!events.length) {
+        throw new Error(('There are no events for time log'.yellow))
     }
+
+
+    // for (const event of events) {
+    //   await updateWorkLog('ITL-3', {
+    //     comment: event.summary,
+    //     started: `${event.date}T00:00:00.000-0700`,
+    //     timeSpentSeconds: event.duration
+    //   }).then(res => {
+    //       console.log(`${event.date} - ${event.summary} - [DONE]`)
+    //   }).catch(console.log)
+    // }
+
+    console.log(events)
   }
 
 module.exports = {

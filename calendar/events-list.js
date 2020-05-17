@@ -35,8 +35,7 @@ const listEvents = (auth, cb, period) => {
   }
 
 const extractEventsInfo = events => events
-    // added filters here
-    .filter(event => filterBySummary(event, []))
+    .filter(event => filterBySummary(event, ['UI Infra Scrum']))
     .map(extractRequiredInfo)
 
 const getEventsInfo = period => new Promise((resolve, reject) => {
