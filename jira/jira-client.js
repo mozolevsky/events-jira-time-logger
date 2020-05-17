@@ -1,5 +1,6 @@
 const JiraClient = require('jira-connector')
 const {getJiraCredentials} = require('./utils')
+const {getGeneralSettings} = require('../utils')
 
 const {host, username, password} = getJiraCredentials()
 const jira = new JiraClient({
@@ -31,18 +32,17 @@ const updatePeriodWorkLog = async events => {
         throw new Error(('There are no events for time log'.yellow))
     }
 
+    const {taskKey} = getGeneralSettings()
 
-    // for (const event of events) {
-    //   await updateWorkLog('ITL-3', {
-    //     comment: event.summary,
-    //     started: `${event.date}T00:00:00.000-0700`,
-    //     timeSpentSeconds: event.duration
-    //   }).then(res => {
-    //       console.log(`${event.date} - ${event.summary} - [DONE]`)
-    //   }).catch(console.log)
-    // }
-
-    console.log(events)
+    for (const event of events) {
+      await updateWorkLog(taskKey, {
+        comment: event.summary,
+        started: `${event.date}T00:00:00.000-0700`,
+        timeSpentSeconds: event.duration
+      }).then(res => {
+          console.log(`${event.date} - ${event.summary} - [DONE]`)
+      }).catch(console.log)
+    }
   }
 
 module.exports = {

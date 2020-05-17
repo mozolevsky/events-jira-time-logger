@@ -1,4 +1,5 @@
-colors = require('colors')
+const fs = require('fs')
+const colors = require('colors')
 
 const validateDate = dateString => {
     const reg = /^\d{4}-\d{2}-\d{2}$/
@@ -16,4 +17,18 @@ const validateDate = dateString => {
     return false
   }
 
-module.exports = validateDate
+
+const getGeneralSettings = () => {
+  const path = './settings/general.json'
+
+  if (fs.existsSync(path)) {
+      return JSON.parse(fs.readFileSync(path, {encoding: 'utf-8'}))
+  }
+
+  throw new Error('Can\'t find ./settings/general.json')
+}
+
+module.exports = {
+  validateDate,
+  getGeneralSettings
+}

@@ -1,7 +1,8 @@
 const {google} = require('googleapis')
 const fs = require('fs')
 const authorize = require('./calendar-autorize')
-const {extractRequiredInfo, filterBySummary, getISODateWithOffset} = require('./utils') 
+const {extractRequiredInfo, filterBySummary, getISODateWithOffset} = require('./utils')
+const {getGeneralSettings} = require('../utils')
 
 /**
  * 
@@ -34,9 +35,14 @@ const listEvents = (auth, cb, period) => {
     });
   }
 
-const extractEventsInfo = events => events
-    .filter(event => filterBySummary(event, ['UI Infra Scrum']))
-    .map(extractRequiredInfo)
+const extractEventsInfo = events => {
+
+  const filters = getGeneralSettings().excludedSummaries
+
+  return events
+  .filter(event => filterBySummary(event, filters))
+  .map(extractRequiredInfo)
+}
 
 const getEventsInfo = period => new Promise((resolve, reject) => {
   fs.readFile('./security/calendar-credentials.json', (err, content) => {

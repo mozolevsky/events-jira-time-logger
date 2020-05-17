@@ -1,7 +1,7 @@
 const inquirer = require('inquirer')
 const colors = require('colors')
 const {logEventsTime} = require('./')
-const validateDate = require('./utils')
+const {validateDate} = require('./utils')
 
 const questions = [
     {
