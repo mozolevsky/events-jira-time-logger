@@ -32,7 +32,7 @@ const updatePeriodWorkLog = async events => {
         started: `${event.date}T00:00:00.000-0700`,
         timeSpentSeconds: event.duration
       }).then(res => {
-          console.log(`${event.date} - ${event.summary} - [DONE]`)
+          console.log(`${event.date} - ${event.summary} - [DONE] - time: ${event.duration / 60}m`)
       }).catch(console.log)
     }
   }
