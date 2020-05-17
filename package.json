@@ -24,6 +24,6 @@
     "jira-connector": "^3.1.0"
   },
   "bin": {
-    "ejtl": "./cli.js"
+    "log-events-time": "./bin/log-cli"
   }
 }

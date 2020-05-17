@@ -6,6 +6,9 @@ const {getWorklog, updatePeriodWorkLog} = require('./jira/jira-client')
  * @param {string} start date of the period in format '2020-05-11'
  * @param {string} end date of the period in format '2020-05-11'
  */
-const logEventsTime = (start, end) => getEventsInfo({start, end}).then(updatePeriodWorkLog)
+const logEventsTime = (start, end) => getEventsInfo({start, end}).then(res => {
+    console.log(res)
+    // updatePeriodWorkLog
+})
 
 module.exports = {logEventsTime}
