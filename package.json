@@ -15,6 +15,9 @@
     "url": "https://github.com/mozolevsky/events-jira-time-logger/issues",
     "email": "mrmozolevsky@gmail.com"
   },
+  "scripts": {
+    "lint": "eslint . --fix"
+  },
   "main": "index.js",
   "repository": "git@github.com:mozolevsky/events-jira-time-logger.git",
   "dependencies": {
@@ -22,6 +25,11 @@
     "googleapis": "39",
     "inquirer": "^7.1.0",
     "jira-connector": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1"
   },
   "bin": {
     "log-events-time": "./bin/log"
