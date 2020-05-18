@@ -42,10 +42,6 @@ const questions = [
             {
                 name: 'Initial set up',
                 value: 'initialSetUp'
-            },
-            {
-                name: 'Change general settings',
-                value: 'changeGeneralSettings'
             }
         ]
     }

@@ -1,5 +1,6 @@
 const {google} = require('googleapis')
 const fs = require('fs')
+const path = require('path')
 const authorize = require('./calendar-autorize')
 const {extractRequiredInfo, filterBySummary, getISODateWithOffset} = require('./utils')
 const {getGeneralSettings} = require('../utils')
@@ -45,7 +46,7 @@ const extractEventsInfo = events => {
 }
 
 const getEventsInfo = period => new Promise((resolve, reject) => {
-  fs.readFile('./security/calendar-credentials.json', (err, content) => {
+  fs.readFile(path.join(__dirname, '../security/calendar-credentials.json'), (err, content) => {
     if (err) {
       reject('Please add the credentials.json file')
     }

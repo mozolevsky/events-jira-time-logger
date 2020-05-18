@@ -1,13 +1,14 @@
-const fs = require('fs');
-const readline = require('readline');
-const {google} = require('googleapis');
+const fs = require('fs')
+const readline = require('readline')
+const {google} = require('googleapis')
+const path = require('path')
 
 // If modifying these scopes, delete token.json.
-const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = './security/calendar-token.json';
+const TOKEN_PATH = path.join(__dirname, '../security/calendar-token.json')
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the

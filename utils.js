@@ -1,5 +1,8 @@
 const fs = require('fs')
 const colors = require('colors')
+const path = require('path')
+
+const getPath = pathStr => path.join(__dirname, pathStr)
 
 const validateDate = dateString => {
     const reg = /^\d{4}-\d{2}-\d{2}$/
@@ -19,7 +22,7 @@ const validateDate = dateString => {
 
 
 const getGeneralSettings = () => {
-  const path = './settings/general.json'
+  const path = getPath('./settings/general.json')
 
   if (fs.existsSync(path)) {
       return JSON.parse(fs.readFileSync(path, {encoding: 'utf-8'}))
@@ -53,7 +56,7 @@ const createEmptySettingFiles = () => {
     if (fs.existsSync(path)) {
       console.log(`File ${path} already exists`)
     } else {
-      fs.writeFileSync(path, JSON.stringify(content), {encoding: 'utf-8'})
+      fs.writeFileSync(getPath(path), JSON.stringify(content), {encoding: 'utf-8'})
       console.log(`File: ${path} created`)
     }
   })

@@ -1,10 +1,11 @@
 const fs = require('fs')
+const path = require('path')
 
 const getJiraCredentials = () => {
-    const path = './security/jira-credentials.json'
+    const JCPath = path.join(__dirname, '../security/jira-credentials.json')
 
-    if (fs.existsSync(path)) {
-        return JSON.parse(fs.readFileSync(path, {encoding: 'utf-8'}))
+    if (fs.existsSync(JCPath)) {
+        return JSON.parse(fs.readFileSync(JCPath, {encoding: 'utf-8'}))
     } else {
         console.log('File jira-credentials.json was not found')
     }

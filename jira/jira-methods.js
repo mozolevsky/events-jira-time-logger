@@ -1,4 +1,5 @@
 const {getGeneralSettings} = require('../utils')
+const path = require('path')
 
 const updateWorkLog = (issueKey, {timeSpentSeconds, comment, started}) => {
     const jira = require('./jira-client')
@@ -14,7 +15,7 @@ const updateWorkLog = (issueKey, {timeSpentSeconds, comment, started}) => {
 }
 
 const getWorklog = (issueKey) => {
-    const jira = require('./jira-client')
+    const jira = require(path.join(__dirname,'./jira-client'))
     return jira.issue.getWorkLogs({issueKey})
 }
 
