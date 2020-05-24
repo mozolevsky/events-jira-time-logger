@@ -5,5 +5,8 @@ node_modules
 
 **/settings/**
 !**/settings/readme.md
+dist
 
 yarn-error.log
+.vscode
+

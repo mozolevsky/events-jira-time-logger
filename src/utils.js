@@ -3,7 +3,7 @@ const fs = require('fs')
 const colors = require('colors')
 const path = require('path')
 
-const getPath = (pathStr) => path.join(__dirname, pathStr)
+const getPath = (pathStr) => path.join(process.cwd(), pathStr)
 
 const validateDate = (dateString) => {
     const reg = /^\d{4}-\d{2}-\d{2}$/

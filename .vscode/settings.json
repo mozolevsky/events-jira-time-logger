@@ -1,4 +1,6 @@
 {
     "eslint.alwaysShowStatus": true,
-    "eslint.format.enable": true
+    "eslint.format.enable": true,
+    "prettier.arrowParens": "avoid",
+    "prettier.configPath": "./.prettierrc"
 }
