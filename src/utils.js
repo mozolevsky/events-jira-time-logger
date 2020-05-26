@@ -66,6 +66,24 @@ const createEmptySettingFiles = () => {
     })
 }
 
+// Draft
+// const getCurrentWeek = () => {
+//     const date = new Date()
+
+//     const weekFirstDay = 1
+//     const weekLastDay = 5
+//     const currentDay = date.getDay()
+
+//     const startOffset = currentDay - weekFirstDay
+//     const endOffset = weekLastDay - currentDay
+
+//     const weekBeginDate = new Date(date - startOffset)
+//     const weeEndDate = date + endOffset
+
+//     console.log('start:', weekBeginDate)
+//     console.log('end:', weeEndDate)
+// }
+
 module.exports = {
     validateDate,
     getGeneralSettings,
