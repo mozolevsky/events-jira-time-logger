@@ -2,7 +2,11 @@ const inquirer = require('inquirer')
 // eslint-disable-next-line no-unused-vars
 const colors = require('colors')
 const { logEventsTime } = require('.')
-const { validateDate, createEmptySettingFiles } = require('./utils')
+const {
+    validateDate,
+    createEmptySettingFiles,
+    getCurrentWorkWeekPeriod,
+} = require('./utils')
 
 const questions = [
     {
@@ -13,6 +17,10 @@ const questions = [
             {
                 name: 'Log time for period',
                 value: 'logTime',
+            },
+            {
+                name: 'Log current week',
+                value: 'logCurrentWeek',
             },
             {
                 name: 'Other',
@@ -46,11 +54,17 @@ const questions = [
             },
         ],
     },
+    {
+        type: 'confirm',
+        name: 'currentWeekLogging',
+        message: 'Confirm week logging?',
+        when: (answers) => answers.mainAction === 'logCurrentWeek',
+    },
 ]
 
 inquirer
     .prompt(questions)
-    .then(({ startDate, endDate, otherOperation }) => {
+    .then(({ startDate, endDate, otherOperation, currentWeekLogging }) => {
         if (startDate && endDate) {
             console.log('Logging ...'.yellow)
             logEventsTime(startDate, endDate)
@@ -60,6 +74,15 @@ inquirer
 
         if (otherOperation === 'initialSetUp') {
             createEmptySettingFiles()
+        }
+
+        if (currentWeekLogging) {
+            const [start, end] = getCurrentWorkWeekPeriod()
+
+            console.log('Logging ...'.yellow)
+            logEventsTime(start, end)
+                .then(() => console.log('Time was logged successfully'.green))
+                .catch(console.log)
         }
     })
     .catch(console.log)

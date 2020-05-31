@@ -66,26 +66,26 @@ const createEmptySettingFiles = () => {
     })
 }
 
-// Draft
-// const getCurrentWeek = () => {
-//     const date = new Date()
+const getShortISOString = (date) => date.split('T')[0]
 
-//     const weekFirstDay = 1
-//     const weekLastDay = 5
-//     const currentDay = date.getDay()
+// Current week: test implementation
+const getCurrentWorkWeekPeriod = () => {
+    const firstDay = 1
+    const lastDay = 5
+    const currentDay = new Date().getDay()
 
-//     const startOffset = currentDay - weekFirstDay
-//     const endOffset = weekLastDay - currentDay
+    const startOffset = -((currentDay && currentDay - firstDay) || -1)
+    const endOffset = lastDay - currentDay
 
-//     const weekBeginDate = new Date(date - startOffset)
-//     const weeEndDate = date + endOffset
-
-//     console.log('start:', weekBeginDate)
-//     console.log('end:', weeEndDate)
-// }
+    return [startOffset, endOffset]
+        .map((offset) => new Date().setDate(new Date().getDate() + offset))
+        .map((date) => new Date(date).toISOString())
+        .map(getShortISOString)
+}
 
 module.exports = {
     validateDate,
     getGeneralSettings,
     createEmptySettingFiles,
+    getCurrentWorkWeekPeriod,
 }
