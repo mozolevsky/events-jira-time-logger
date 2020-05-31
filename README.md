@@ -32,5 +32,5 @@ excludedSummaries - tasks with those titles will be skipped during logging <br>
 ```
 
 How to use: <br>
-1. yarn log-events-time<br>
+1. yarn log-time<br>
 2. follow CLI commands <br>

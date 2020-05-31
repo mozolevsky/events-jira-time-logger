@@ -41,6 +41,6 @@
     "webpack-cli": "^3.3.11"
   },
   "bin": {
-    "log-events-time": "./bin/log"
+    "log-time": "./bin/log"
   }
 }

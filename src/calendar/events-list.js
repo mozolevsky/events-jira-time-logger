@@ -54,7 +54,7 @@ const listEvents = (auth, cb, period) => {
 const getEventsInfo = (period) =>
     new Promise((resolve, reject) => {
         fs.readFile(
-            path.join(process.cwd(), './security/calendar-credentials.json'),
+            path.join(__dirname, '../security/calendar-credentials.json'),
             (err, content) => {
                 if (err) {
                     reject(new Error('Please add the credentials.json file'))

@@ -9,7 +9,7 @@ const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = path.join(process.cwd(), './security/calendar-token.json')
+const TOKEN_PATH = path.join(__dirname, '../security/calendar-token.json')
 
 /**
  * Get and store new token after prompting for user authorization, and then
