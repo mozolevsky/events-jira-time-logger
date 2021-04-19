@@ -19,7 +19,8 @@
     "lint": "eslint . --fix",
     "clean": "rm -rf ./dist",
     "prebuild": "yarn clean",
-    "build": "webpack --config=webpack.config.js --progress"
+    "build": "webpack --config=webpack.config.js --progress",
+    "start": "node ./src/cli.js"
   },
   "main": "index.js",
   "repository": "git@github.com:mozolevsky/events-jira-time-logger.git",

@@ -79,7 +79,7 @@ inquirer
         if (currentWeekLogging) {
             const [start, end] = getCurrentWorkWeekPeriod()
 
-            console.log('Logging ...'.yellow)
+            console.log(`Logging from ${start} till ${end}`.yellow)
             logEventsTime(start, end)
                 .then(() => console.log('Time was logged successfully'.green))
                 .catch(console.log)
